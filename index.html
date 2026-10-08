@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting...</title>
   <style>
-    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -27,7 +26,6 @@
       overflow: hidden;
     }
 
-    /* Redirect Card with Glassmorphism */
     .redirect-card {
       background: rgba(30, 41, 59, 0.65);
       backdrop-filter: blur(20px);
@@ -40,15 +38,8 @@
       text-align: center;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 
                   0 0 30px rgba(37, 99, 235, 0.1);
-      animation: cardAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes cardAppear {
-      0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* Brand & Glowing Logo */
     .brand-section {
       margin-bottom: 18px;
     }
@@ -66,12 +57,6 @@
       font-weight: 800;
       color: #ffffff;
       box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
-      animation: pulseLogo 3s infinite ease-in-out;
-    }
-
-    @keyframes pulseLogo {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-      50% { transform: scale(1.04); box-shadow: 0 0 30px rgba(139, 92, 246, 0.7); }
     }
 
     .brand-tag {
@@ -82,10 +67,8 @@
     .brand-name {
       color: #38bdf8;
       font-weight: 700;
-      text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
     }
 
-    /* Destination Box */
     .destination-box {
       background: rgba(15, 23, 42, 0.7);
       border-radius: 14px;
@@ -107,7 +90,6 @@
       word-break: break-all;
     }
 
-    /* Timer & Progress Bar */
     .timer-section {
       margin-bottom: 18px;
     }
@@ -140,7 +122,6 @@
       transition: width 1s linear;
     }
 
-    /* Promo Box */
     .promo-box {
       background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(124, 58, 237, 0.08));
       border: 1px solid rgba(56, 189, 248, 0.25);
@@ -163,7 +144,6 @@
       line-height: 1.4;
     }
 
-    /* Actions & Gorgeous Buttons */
     .actions {
       display: flex;
       flex-direction: column;
@@ -189,41 +169,27 @@
       width: 100%;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
-    }
-
     .btn-secondary {
       background: rgba(255, 255, 255, 0.03);
       color: #38bdf8;
       border: 1px solid rgba(56, 189, 248, 0.3);
       font-size: 0.82rem;
     }
-
-    .btn-secondary:hover {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: rgba(56, 189, 248, 0.6);
-      transform: translateY(-1px);
-    }
   </style>
 </head>
 <body>
 
   <div class="redirect-card">
-    <!-- Brand Section -->
     <div class="brand-section">
       <div class="logo">MY</div>
       <p class="brand-tag">This stand / link is created by <span class="brand-name">Mohamed Yasser</span></p>
     </div>
 
-    <!-- Destination Info -->
     <div class="destination-box">
       <p class="destination-label">You are being redirected to:</p>
       <p id="dest-name" class="destination-name">Loading... 🔗</p>
     </div>
 
-    <!-- Timer Section -->
     <div class="timer-section">
       <p class="timer-text">Automatic redirect in <span id="countdown" class="seconds-counter">5</span> seconds...</p>
       <div class="progress-bar-bg">
@@ -231,13 +197,11 @@
       </div>
     </div>
 
-    <!-- Promo Box -->
     <div class="promo-box">
       <p class="promo-title">✨ Smart NFC Stand</p>
       <p class="promo-desc">Instantly share your social media, Google reviews, and payment options with a single tap!</p>
     </div>
 
-    <!-- Actions -->
     <div class="actions">
       <button id="redirect-btn" class="btn btn-primary">Go Now 🚀</button>
       <a href="https://s-h.s.gy" target="_blank" class="btn btn-secondary">Get Your Custom NFC Stand 📲</a>
@@ -264,8 +228,6 @@
           destName = "WhatsApp Chat 💬";
         } else if (hostname.includes('vercel.app')) {
           destName = "Payment Gateway / Custom App 💳";
-        } else if (hostname.includes('truecaller.com')) {
-          destName = "Truecaller Profile 🔍";
         } else {
           destName = hostname;
         }
