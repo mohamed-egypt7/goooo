@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>جاري التوجيه...</title>
+  <title>Redirecting...</title>
   <style>
-    /* إعادة ضبط الخصائص */
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -14,48 +14,64 @@
     }
 
     body {
-      background: #0f172a;
-      background-image: radial-gradient(at 50% 0%, #1e293b 0px, transparent 75%);
+      background: #090d16;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 40%);
       color: #f8fafc;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 16px;
+      overflow: hidden;
     }
 
-    /* كارت التوجيه */
+    /* Redirect Card with Glassmorphism */
     .redirect-card {
-      background: rgba(30, 41, 59, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 24px 20px;
+      background: rgba(30, 41, 59, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 28px 22px;
       width: 100%;
       max-width: 380px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 
+                  0 0 30px rgba(37, 99, 235, 0.1);
+      animation: cardAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* البراند واللوجو */
+    @keyframes cardAppear {
+      0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Brand & Glowing Logo */
     .brand-section {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .logo {
-      width: 55px;
-      height: 55px;
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 10px;
-      font-size: 20px;
-      font-weight: bold;
+      margin: 0 auto 12px;
+      font-size: 24px;
+      font-weight: 800;
       color: #ffffff;
-      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+      animation: pulseLogo 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseLogo {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+      50% { transform: scale(1.04); box-shadow: 0 0 30px rgba(139, 92, 246, 0.7); }
     }
 
     .brand-tag {
@@ -66,50 +82,52 @@
     .brand-name {
       color: #38bdf8;
       font-weight: 700;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
     }
 
-    /* معلومات الجهة المستهدفة */
+    /* Destination Box */
     .destination-box {
-      background: rgba(15, 23, 42, 0.6);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(56, 189, 248, 0.15);
     }
 
     .destination-label {
       font-size: 0.75rem;
       color: #94a3b8;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
 
     .destination-name {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
       color: #38bdf8;
       word-break: break-all;
     }
 
-    /* العداد وشريط التقدم */
+    /* Timer & Progress Bar */
     .timer-section {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .timer-text {
-      font-size: 0.8rem;
-      color: #cbd5e1;
-      margin-bottom: 6px;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      margin-bottom: 8px;
     }
 
     .seconds-counter {
-      font-weight: bold;
-      color: #38bdf8;
+      font-weight: 800;
+      color: #f43f5e;
+      font-size: 1.1rem;
     }
 
     .progress-bar-bg {
       width: 100%;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.1);
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       overflow: hidden;
     }
@@ -117,19 +135,19 @@
     .progress-bar-fill {
       height: 100%;
       width: 100%;
-      background: linear-gradient(90deg, #2563eb, #38bdf8);
+      background: linear-gradient(90deg, #3b82f6, #f43f5e);
       border-radius: 10px;
       transition: width 1s linear;
     }
 
-    /* قسم التعريف بالستاند (ملموم وشيك) */
+    /* Promo Box */
     .promo-box {
-      background: rgba(37, 99, 235, 0.1);
-      border: 1px dashed rgba(56, 189, 248, 0.3);
-      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(124, 58, 237, 0.08));
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 14px;
       padding: 12px;
-      margin-bottom: 16px;
-      text-align: right;
+      margin-bottom: 18px;
+      text-align: left;
     }
 
     .promo-title {
@@ -137,9 +155,6 @@
       font-weight: 700;
       color: #38bdf8;
       margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .promo-desc {
@@ -148,81 +163,84 @@
       line-height: 1.4;
     }
 
-    /* الأزرار */
+    /* Actions & Gorgeous Buttons */
     .actions {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .btn {
       text-decoration: none;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 0.85rem;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.9rem;
       font-weight: 600;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       display: block;
       cursor: pointer;
     }
 
     .btn-primary {
-      background: #2563eb;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
       border: none;
       width: 100%;
     }
 
     .btn-primary:hover {
-      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
     }
 
     .btn-secondary {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.03);
       color: #38bdf8;
       border: 1px solid rgba(56, 189, 248, 0.3);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
     }
 
     .btn-secondary:hover {
-      background: rgba(56, 189, 248, 0.08);
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.6);
+      transform: translateY(-1px);
     }
   </style>
 </head>
 <body>
 
   <div class="redirect-card">
-    <!-- بصمتك واللوجو -->
+    <!-- Brand Section -->
     <div class="brand-section">
       <div class="logo">MY</div>
-      <p class="brand-tag">هذا الستاند / الرابط من إعداد <span class="brand-name">محمد ياسر</span></p>
+      <p class="brand-tag">This stand / link is created by <span class="brand-name">Mohamed Yasser</span></p>
     </div>
 
-    <!-- جهة التوجيه -->
+    <!-- Destination Info -->
     <div class="destination-box">
-      <p class="destination-label">جاري توجيهك إلى:</p>
-      <p id="dest-name" class="destination-name">جاري التحديد... 🔗</p>
+      <p class="destination-label">You are being redirected to:</p>
+      <p id="dest-name" class="destination-name">Loading... 🔗</p>
     </div>
 
-    <!-- العداد وشريط الوقت -->
+    <!-- Timer Section -->
     <div class="timer-section">
-      <p class="timer-text">الانتقال التلقائي خلال <span id="countdown" class="seconds-counter">5</span> ثوانٍ...</p>
+      <p class="timer-text">Automatic redirect in <span id="countdown" class="seconds-counter">5</span> seconds...</p>
       <div class="progress-bar-bg">
         <div id="progress" class="progress-bar-fill"></div>
       </div>
     </div>
 
-    <!-- قسم التعريفي بالستاند NFC -->
+    <!-- Promo Box -->
     <div class="promo-box">
-      <p class="promo-title">✨ ما هو هذا الستاند؟</p>
-      <p class="promo-desc">ستاند ذكي بتقنية NFC لتسهيل مشاركة صفحات التواصل الاجتماعي، وتقييمات جوجل، ووسائل الدفع بلمسة واحدة لمشروعك أو محلك!</p>
+      <p class="promo-title">✨ Smart NFC Stand</p>
+      <p class="promo-desc">Instantly share your social media, Google reviews, and payment options with a single tap!</p>
     </div>
 
-    <!-- الأزرار -->
+    <!-- Actions -->
     <div class="actions">
-      <button id="redirect-btn" class="btn btn-primary">الانتقال فوراً الآن 🚀</button>
-      <a href="https://s-h.s.gy" target="_blank" class="btn btn-secondary">طلب ستاند NFC ذكي خاص بك 📲</a>
+      <button id="redirect-btn" class="btn btn-primary">Go Now 🚀</button>
+      <a href="https://s-h.s.gy" target="_blank" class="btn btn-secondary">Get Your Custom NFC Stand 📲</a>
     </div>
   </div>
 
@@ -239,18 +257,18 @@
         let hostname = urlObj.hostname.replace('www.', '');
         
         if (hostname.includes('facebook.com')) {
-          destName = "صفحة الفيسبوك الشخصية ُ📘";
+          destName = "Facebook Official Page 📘";
         } else if (hostname.includes('instagram.com')) {
-          `حساب الإنستجرام 📸`;
+          destName = "Instagram Profile 📸";
         } else if (hostname.includes('wa.me') || hostname.includes('whatsapp.com')) {
-          destName = "محادثة الواتساب 💬";
+          destName = "WhatsApp Chat 💬";
         } else if (hostname.includes('vercel.app')) {
-          destName = "بوابة الدفع / المنصة الخاصة 💳";
+          destName = "Payment Gateway / Custom App 💳";
         } else {
           destName = hostname;
         }
       } catch (e) {
-        destName = "الرابط المستهدف 🔗";
+        destName = "Target Link 🔗";
       }
     }
 
@@ -271,14 +289,5 @@
       countdownEl.textContent = timeLeft;
       
       let percentage = (timeLeft / 5) * 100;
-      progressEl.style.width = percentage + '%';
-
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        doRedirect();
-      }
-    }, 1000);
-  </script>
-
-</body>
-</html>
+      progress_width = percentage + '%';
+      progressEl.style.width =
