@@ -201,7 +201,7 @@
   <div class="redirect-card">
     <div class="brand-section">
       <div class="logo">MY</div>
-      <p class="brand-tag">تم إنشاؤه بواسطة <span class="brand-name">Mohamed Yasser</span>[span_0](start_span)[span_0](end_span)</p>
+      <p class="brand-tag">تم إنشاؤه بواسطة <span class="brand-name">Mohamed Yasser</span></p>
     </div>
 
     <div class="destination-box">
@@ -220,7 +220,7 @@
     </div>
 
     <div class="promo-box">
-      <p class="promo-title">✨ Smart NFC Stand[span_1](start_span)[span_1](end_span)</p>
+      <p class="promo-title">✨ Smart NFC Stand</p>
       <p class="promo-desc">شارك حساباتك على السوشيال ميديا وتقييمات جوجل بضغطة واحدة!</p>
     </div>
 
@@ -231,7 +231,6 @@
   </div>
 
   <script>
-    // منع حفظ أي بيانات مؤقتة أو تخزين محلي نهائياً لمنع أي تعليق بين الصفحات
     if (window.localStorage) { localStorage.clear(); }
     if (window.sessionStorage) { sessionStorage.clear(); }
 
@@ -253,7 +252,7 @@
       cleanName = cleanName.replace(/[-_]/g, ' ');
 
       document.getElementById('dest-name').textContent = cleanName;
-    } catch (e) {
+    }	catch (e) {
       document.getElementById('dest-name').textContent = "الموقع المستهدف";
     }
 
