@@ -175,7 +175,7 @@
     <!-- جهة التوجيه -->
     <div class="destination-box">
       <p class="destination-label">جاري توجيهك إلى:</p>
-      <p id="dest-name" class="destination-name">صفحة الفيسبوك الرسمية 🔗</p>
+      <p id="dest-name" class="destination-name">جاري التحديد... 🔗</p>
     </div>
 
     <!-- العداد وشريط الوقت -->
@@ -196,18 +196,39 @@
 
   <script>
     // جلب الرابط المراد التوجيه له من رابط الصفحة نفسه (URL Parameter)
-    // مثال: https://username.github.io/?to=https://facebook.com&title=فيسبوك
     const urlParams = new URLSearchParams(window.location.search);
     
-    // الرابط الافتراضي لو مفيش رابط محدد في الـ URL
-    const defaultUrl = "https://facebook.com"; 
+    // الرابط الافتراضي لو مفيش رابط محدد
+    const defaultUrl = "https://payment-mohamed.vercel.app/"; 
     const targetUrl = urlParams.get('to') || defaultUrl;
     
-    // عنوان الصفحة أو اسمها (اختياري)
-    const customTitle = urlParams.get('title');
-    if (customTitle) {
-      document.getElementById('dest-name').textContent = customTitle + " 🔗";
+    // استخراج اسم ذكي للوجهة أوتوماتيكياً
+    let destName = urlParams.get('title');
+    
+    if (!destName) {
+      try {
+        const urlObj = new URL(targetUrl);
+        let hostname = urlObj.hostname.replace('www.', '');
+        
+        // تخصيص الأسماء المشهورة تلقائياً
+        if (hostname.includes('facebook.com')) {
+          destName = "صفحة الفيسبوك الشخصية 📘";
+        } else if (hostname.includes('instagram.com')) {
+          destName = "حساب الإنستجرام 📸";
+        } else if (hostname.includes('wa.me') || hostname.includes('whatsapp.com')) {
+          destName = "محادثة الواتساب 💬";
+        } else if (hostname.includes('vercel.app')) {
+          destName = "بوابة الدفع / المنصة الخاصة 💳";
+        } else {
+          destName = hostname; // اسم الموقع الحقيقي أوتوماتيك
+        }
+      } catch (e) {
+        destName = "الرابط المستهدف 🔗";
+      }
     }
+
+    // عرض الاسم في الصفحة
+    document.getElementById('dest-name').textContent = destName;
 
     // ربط زر الانتقال الفوري بالرابط
     const redirectBtn = document.getElementById('redirect-btn');
