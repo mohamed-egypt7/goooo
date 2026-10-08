@@ -31,35 +31,35 @@
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 28px 20px;
+      padding: 24px 20px;
       width: 100%;
-      max-width: 360px; /* حجم ملموم جداً للموبايل */
+      max-width: 380px;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     }
 
     /* البراند واللوجو */
     .brand-section {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .logo {
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       background: linear-gradient(135deg, #2563eb, #7c3aed);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 12px;
-      font-size: 22px;
+      margin: 0 auto 10px;
+      font-size: 20px;
       font-weight: bold;
       color: #ffffff;
       box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
     }
 
     .brand-tag {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #94a3b8;
     }
 
@@ -72,19 +72,19 @@
     .destination-box {
       background: rgba(15, 23, 42, 0.6);
       border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 20px;
+      padding: 12px;
+      margin-bottom: 16px;
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .destination-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #94a3b8;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .destination-name {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #38bdf8;
       word-break: break-all;
@@ -92,24 +92,23 @@
 
     /* العداد وشريط التقدم */
     .timer-section {
-      margin-bottom: 22px;
+      margin-bottom: 16px;
     }
 
     .timer-text {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #cbd5e1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .seconds-counter {
       font-weight: bold;
       color: #38bdf8;
-      font-size: 1rem;
     }
 
     .progress-bar-bg {
       width: 100%;
-      height: 6px;
+      height: 5px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       overflow: hidden;
@@ -123,27 +122,56 @@
       transition: width 1s linear;
     }
 
+    /* قسم التعريف بالستاند (ملموم وشيك) */
+    .promo-box {
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px dashed rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+      text-align: right;
+    }
+
+    .promo-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .promo-desc {
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
     /* الأزرار */
     .actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn {
       text-decoration: none;
-      padding: 12px;
+      padding: 10px;
       border-radius: 10px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       transition: all 0.2s ease;
       display: block;
+      cursor: pointer;
     }
 
     .btn-primary {
       background: #2563eb;
       color: #ffffff;
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      border: none;
+      width: 100%;
     }
 
     .btn-primary:hover {
@@ -152,14 +180,13 @@
 
     .btn-secondary {
       background: transparent;
-      color: #94a3b8;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
       font-size: 0.8rem;
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: #ffffff;
+      background: rgba(56, 189, 248, 0.08);
     }
   </style>
 </head>
@@ -186,23 +213,24 @@
       </div>
     </div>
 
+    <!-- قسم التعريفي بالستاند NFC -->
+    <div class="promo-box">
+      <p class="promo-title">✨ ما هو هذا الستاند؟</p>
+      <p class="promo-desc">ستاند ذكي بتقنية NFC لتسهيل مشاركة صفحات التواصل الاجتماعي، وتقييمات جوجل، ووسائل الدفع بلمسة واحدة لمشروعك أو محلك!</p>
+    </div>
+
     <!-- الأزرار -->
     <div class="actions">
-      <a id="redirect-btn" href="#" class="btn btn-primary">الانتقال فوراً الآن 🚀</a>
-      <!-- حط رقم الواتساب بتاعك مكان الـ 201000000000 -->
-      <a href="https://wa.me/201000000000?text=أهلاً%20محمد،%20حابب%20أستفسر%20عن%20ستاندات%20NFC" target="_blank" class="btn btn-secondary">لمعلومات أكثر أو لطلب ستاند خاص بك 📲</a>
+      <button id="redirect-btn" class="btn btn-primary">الانتقال فوراً الآن 🚀</button>
+      <a href="https://s-h.s.gy" target="_blank" class="btn btn-secondary">طلب ستاند NFC ذكي خاص بك 📲</a>
     </div>
   </div>
 
   <script>
-    // جلب الرابط المراد التوجيه له من رابط الصفحة نفسه (URL Parameter)
     const urlParams = new URLSearchParams(window.location.search);
-    
-    // الرابط الافتراضي لو مفيش رابط محدد
     const defaultUrl = "https://payment-mohamed.vercel.app/"; 
     const targetUrl = urlParams.get('to') || defaultUrl;
     
-    // استخراج اسم ذكي للوجهة أوتوماتيكياً
     let destName = urlParams.get('title');
     
     if (!destName) {
@@ -210,31 +238,30 @@
         const urlObj = new URL(targetUrl);
         let hostname = urlObj.hostname.replace('www.', '');
         
-        // تخصيص الأسماء المشهورة تلقائياً
         if (hostname.includes('facebook.com')) {
-          destName = "صفحة الفيسبوك الشخصية 📘";
+          destName = "صفحة الفيسبوك الشخصية ُ📘";
         } else if (hostname.includes('instagram.com')) {
-          destName = "حساب الإنستجرام 📸";
+          `حساب الإنستجرام 📸`;
         } else if (hostname.includes('wa.me') || hostname.includes('whatsapp.com')) {
           destName = "محادثة الواتساب 💬";
         } else if (hostname.includes('vercel.app')) {
           destName = "بوابة الدفع / المنصة الخاصة 💳";
         } else {
-          destName = hostname; // اسم الموقع الحقيقي أوتوماتيك
+          destName = hostname;
         }
       } catch (e) {
         destName = "الرابط المستهدف 🔗";
       }
     }
 
-    // عرض الاسم في الصفحة
     document.getElementById('dest-name').textContent = destName;
 
-    // ربط زر الانتقال الفوري بالرابط
-    const redirectBtn = document.getElementById('redirect-btn');
-    redirectBtn.href = targetUrl;
+    function doRedirect() {
+      window.location.replace(targetUrl);
+    }
 
-    // تشغيل العداد التنازلي (5 ثواني)
+    document.getElementById('redirect-btn').addEventListener('click', doRedirect);
+
     let timeLeft = 5;
     const countdownEl = document.getElementById('countdown');
     const progressEl = document.getElementById('progress');
@@ -243,12 +270,12 @@
       timeLeft--;
       countdownEl.textContent = timeLeft;
       
-      const percentage = (timeLeft / 5) * 100;
+      let percentage = (timeLeft / 5) * 100;
       progressEl.style.width = percentage + '%';
 
       if (timeLeft <= 0) {
         clearInterval(timer);
-        window.location.href = targetUrl; // التوجيه التلقائي
+        doRedirect();
       }
     }, 1000);
   </script>
