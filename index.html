@@ -84,7 +84,7 @@
     }
 
     .destination-name {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #38bdf8;
       word-break: break-all;
@@ -164,7 +164,7 @@
     .btn-primary {
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 4px 15px rgba-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
       border: none;
       width: 100%;
     }
@@ -213,31 +213,16 @@
     const defaultUrl = "https://payment-mohamed.vercel.app/"; 
     const targetUrl = urlParams.get('to') || defaultUrl;
     
-    let destName = urlParams.get('title');
+    let destName = "";
     
-    if (!destName) {
-      try {
-        const urlObj = new URL(targetUrl);
-        let hostname = urlObj.hostname.replace('www.', '').toLowerCase();
-        
-        if (hostname.includes('tiktok.com')) {
-          destName = "TikTok Profile 🎵";
-        } else if (hostname.includes('instagram.com')) {
-          destName = "Instagram Profile 📸";
-        } else if (hostname.includes('facebook.com')) {
-          destName = "Facebook Page 📘";
-        } else if (hostname.includes('wa.me') || hostname.includes('whatsapp.com')) {
-          destName = "WhatsApp Chat 💬";
-        } else if (hostname.includes('truecaller.com')) {
-          destName = "Truecaller Profile 🔍";
-        } else if (hostname.includes('youtube.com') || hostname.includes('youtu.be')) {
-          destName = "YouTube Channel ▶️";
-        } else {
-          destName = hostname;
-        }
-      } catch (e) {
-        destName = "Target Link 🔗";
-      }
+    try {
+      const urlObj = new URL(targetUrl);
+      let hostname = urlObj.hostname.replace('www.', ''); // بيشيل www لو موجودة
+      
+      // لو حابب تظهر اسم الموقع نظيف من غير الامتداد الطويل أو تخليه الدومين الأساسي
+      destName = hostname; 
+    } catch (e) {
+      destName = targetUrl;
     }
 
     document.getElementById('dest-name').textContent = destName;
