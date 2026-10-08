@@ -89,24 +89,11 @@
       color: #94a3b8;
     }
 
-    .site-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .site-favicon {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      object-fit: contain;
-    }
-
     .destination-name {
       font-size: 1.05rem;
       font-weight: 800;
       color: #38bdf8;
-      text-transform: capitalize;
+      word-break: break-all;
     }
 
     .timer-section {
@@ -114,4 +101,156 @@
     }
 
     .timer-text {
-      font-size: 0.82
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+    }
+
+    .seconds-counter {
+      font-weight: 800;
+      color: #f43f5e;
+      font-size: 1.1rem;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #3b82f6, #f43f5e);
+      border-radius: 10px;
+      transition: width 1s linear;
+    }
+
+    .promo-box {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(124, 58, 237, 0.08));
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .promo-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+
+    .promo-desc {
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      display: block;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+      border: none;
+      width: 100%;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="redirect-card">
+    <div class="brand-section">
+      <div class="logo">MY</div>
+      <p class="brand-tag">Created by <span class="brand-name">Mohamed Yasser</span>[span_0](start_span)[span_0](end_span)</p>
+    </div>
+
+    <div class="destination-box">
+      <p class="destination-label">You are being redirected to:</p>
+      <p id="dest-name" class="destination-name">Loading...</p>
+    </div>
+
+    <div class="timer-section">
+      <p class="timer-text">Automatic redirect in <span id="countdown" class="seconds-counter">5</span> seconds...</p>
+      <div class="progress-bar-bg">
+        <div id="progress" class="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <div class="promo-box">
+      <p class="promo-title">✨ Smart NFC Stand[span_1](start_span)[span_1](end_span)</p>
+      <p class="promo-desc">Instantly share your social media, Google reviews, and payment options with a single tap!</p>
+    </div>
+
+    <div class="actions">
+      <button id="redirect-btn" class="btn btn-primary">Go Now 🚀</button>
+      <a href="https://s-h.s.gy" target="_blank" class="btn btn-secondary">Get Your Custom NFC Stand 📲</a>
+    </div>
+  </div>
+
+  <script>
+    // جلب الرابط المستهدف من البار بأمان تام
+    const urlParams = new URLSearchParams(window.location.search);
+    const defaultUrl = "https://payment-mohamed.vercel.app/"; 
+    let targetUrl = urlParams.get('to') || defaultUrl;
+
+    // عرض اسم الدومين المستهدف بشكل مباشر وسريع
+    try {
+      const urlObj = new URL(targetUrl);
+      document.getElementById('dest-name').textContent = urlObj.hostname;
+    } catch (e) {
+      document.getElementById('dest-name').textContent = targetUrl;
+    }
+
+    function doRedirect() {
+      window.location.replace(targetUrl);
+    }
+
+    document.getElementById('redirect-btn').addEventListener('click', doRedirect);
+
+    let timeLeft = 5;
+    const countdownEl = document.getElementById('countdown');
+    const progressEl = document.getElementById('progress');
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = timeLeft;
+      
+      let percentage = (timeLeft / 5) * 100;
+      progressEl.style.width = percentage + '%';
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        doRedirect();
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
