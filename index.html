@@ -84,8 +84,8 @@
     }
 
     .destination-name {
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 800;
       color: #38bdf8;
       word-break: break-all;
     }
@@ -164,7 +164,7 @@
     .btn-primary {
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
-      box-shadow: 0 4px 15px rgba-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
       border: none;
       width: 100%;
     }
@@ -187,7 +187,7 @@
 
     <div class="destination-box">
       <p class="destination-label">You are being redirected to:</p>
-      <p id="dest-name" class="destination-name">Loading... 🔗</p>
+      <p id="dest-name" class="destination-name">Querying Site... 🔄</p>
     </div>
 
     <div class="timer-section">
@@ -213,19 +213,26 @@
     const defaultUrl = "https://payment-mohamed.vercel.app/"; 
     const targetUrl = urlParams.get('to') || defaultUrl;
     
-    let destName = "";
-    
-    try {
-      const urlObj = new URL(targetUrl);
-      let hostname = urlObj.hostname.replace('www.', ''); // بيشيل www لو موجودة
-      
-      // لو حابب تظهر اسم الموقع نظيف من غير الامتداد الطويل أو تخليه الدومين الأساسي
-      destName = hostname; 
-    } catch (e) {
-      destName = targetUrl;
+    // دالة استعلام ذكية لتنظيف واستخراج اسم الموقع أوتوماتيكياً من الرابط مباشرة دون أمثلة محفوظة
+    function smartQuerySiteName(url) {
+      try {
+        const urlObj = new URL(url);
+        let hostname = urlObj.hostname.replace('www.', ''); // إزالة www
+        let parts = hostname.split('.'); // تقسيم أجزاء الدومين
+        
+        // استخراج اسم العلامة التجارية الرئيسي (مثال: ipn.eg تصبح ipn، أو site.com تصبح site)
+        let mainName = parts.length > 2 ? parts[parts.length - 2] : parts[0];
+        
+        // تحويل الحرف الأول لأحرف كبيرة وإزالة الرموز الفاصلة لتصبح بشكل منسق وشيك
+        mainName = mainName.replace(/-/g, ' ');
+        return mainName.charAt(0).toUpperCase() + mainName.slice(1);
+      } catch (e) {
+        return "Target Website";
+      }
     }
 
-    document.getElementById('dest-name').textContent = destName;
+    // عرض اسم الموقع المستعلم عنه فوراً
+    document.getElementById('dest-name').textContent = smartQuerySiteName(targetUrl);
 
     function doRedirect() {
       window.location.replace(targetUrl);
