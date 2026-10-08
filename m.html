@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جاري التوجيه...</title>
+  <style>
+    /* إعادة ضبط الخصائص الأساسية */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    /* كارت التوجيه المتوسط والملموم */
+    .redirect-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 380px; /* حجم متوسط ومناسب جداً للموبايل */
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* قسم اللوجو والبراند */
+    .brand-section {
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .brand-tag {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .brand-name {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    /* نص التوجيه والمعاينة */
+    .destination-info {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .destination-title {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 4px;
+    }
+
+    .destination-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* العداد وشريط التقدم */
+    .timer-container {
+      margin-bottom: 20px;
+    }
+
+    .timer-text {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+
+    .countdown-number {
+      font-weight: bold;
+      color: #38bdf8;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #3b82f6, #38bdf8);
+      border-radius: 10px;
+      transition: width 1s linear;
+    }
+
+    /* الأزرار */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: block;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.85rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="redirect-card">
+    <!-- قسم اللوجو وبصمتك -->
+    <div class="brand-section">
+      <div class="logo">MY</div> <!-- تقدر تستبدل النص ده بصورة اللوجو بتاعك <img> -->
+      <p class="brand-tag">هذا الستاند من تصميم وإعداد <span class="brand-name">محمد ياسر</span></p>
+    </div>
+
+    <!-- معلومة للزائر هو رايح فين -->
+    <div class="destination-info">
+      <p class="destination-title">سيتم تحويلك الآن إلى:</p>
+      <p class="destination-name">صفحة الفيسبوك الرسمية 🔗</p>
+    </div>
+
+    <!-- العداد وشريط الوقت -->
+    <div class="timer-container">
+      <p class="timer-text">الانتقال التلقائي خلال <span id="countdown" class="countdown-number">5</span> ثوانٍ...</p>
+      <div class="progress-bar-bg">
+        <div id="progress" class="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <!-- الأزرار -->
+    <div class="actions">
+      <a id="redirect-btn" href="https://facebook.com" class="btn btn-primary">الانتقال فوراً الان 🚀</a>
+      <a href="https://wa.me/201000000000" target="_blank" class="btn btn-secondary">طلب ستاند NFC خاص بك 📲</a>
+    </div>
+  </div>
+
+  <!-- سكربت العداد والتوجيه -->
+  <script>
+    // الرابط المراد التوجيه إليه
+    const targetUrl = "https://facebook.com"; // غير اللينك ده للينك المطلوب
+    let timeLeft = 5;
+    
+    const countdownEl = document.getElementById('countdown');
+    const progressEl = document.getElementById('progress');
+    const redirectBtn = document.getElementById('redirect-btn');
+
+    // تحديث رابط الزرار المباشر
+    redirectBtn.href = targetUrl;
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = timeLeft;
+      
+      // تحديث شريط التقدم
+      const percentage = (timeLeft / 5) * 100;
+      progressEl.style.width = percentage + '%';
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        window.location.href = targetUrl; // التوجيه التلقائي
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
