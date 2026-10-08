@@ -193,7 +193,6 @@
 
     <div class="destination-box">
       <p class="destination-label">You are being redirected to:</p>
-      <!-- هنا هيتعرض اسم اللينك أو الوجهة بناءً على الرابط المبعوث فوراً -->
       <p id="dest-name" class="destination-name">Loading...</p>
     </div>
 
@@ -238,19 +237,44 @@
       targetUrl = defaultUrl;
     }
 
-    // هنا الكود بيقرا اسم الرابط اللي رايح له وتوليد الاسم الخاص بيه ديناميكياً بدون كلمة ثابتة
+    // جدول الأسماء المخصصة (لروابطك أو مساراتك الخاصة)
+    // يمكنك إضافة أي مسار خاص بك هنا مع الاسم الذي تريد أن يظهر بدقة
+    const customNames = {
+      "mo-carrd": "Mo Carrd",
+      "profile": "My Profile",
+      "payment": "Payment Page"
+    };
+
     try {
       const urlObj = new URL(targetUrl);
-      // استخراج اسم الرابط/الموقع بطريقة ذكية من الرابط المستهدف نفسه
-      let pathSegments = urlObj.pathname.split('/').filter(Boolean);
-      let linkIdentifier = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : urlObj.hostname;
-      
-      // تنظيف الاسم وجعله يبدو كاسم الرابط المطلوبة
-      linkIdentifier = linkIdentifier.replace(/[-_]/g, ' ');
-      linkIdentifier = linkIdentifier.charAt(0).toUpperCase() + linkIdentifier.slice(1);
+      let hostname = urlObj.hostname.toLowerCase();
+      let displayName = "";
 
-      document.getElementById('dest-name').textContent = linkIdentifier;
-      document.title = "Redirecting to " + linkIdentifier;
+      // لو الرابط من دومين الاختصار الخاص بك (s-h.s.gy)
+      if (hostname.includes('s-h.s.gy')) {
+        let pathSegments = urlObj.pathname.split('/').filter(Boolean);
+        if (pathSegments.length > 0) {
+          let segment = pathSegments[pathSegments.length - 1].toLowerCase();
+          // لو المسار موجود في القائمة المخصصة لدينا، نعرضه كما هو محدد
+          if (customNames[segment]) {
+            displayName = customNames[segment];
+          } else {
+            // لو مسار جديد من عندنا ومش موجود في القائمة، نظبطه تلقائياً (نشيل الشرطات ونكبر أول حرف)
+            let cleaned = segment.replace(/[-_]/g, ' ');
+            displayName = cleaned.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          }
+        } else {
+          displayName = "Mohamed Yasser";
+        }
+      } else {
+        // لو الرابط من عند أي شخص تاني أو دومين خارجي، يجيب اسم الدومين ويكبر أول حرف تلقائياً
+        let domainParts = hostname.replace('www.', '').split('.');
+        let siteName = domainParts.length >= 2 ? domainParts[domainParts.length - 2] : domainParts[0];
+        displayName = siteName.charAt(0).toUpperCase() + siteName.slice(1);
+      }
+
+      document.getElementById('dest-name').textContent = displayName;
+      document.title = "Redirecting to " + displayName;
     } catch (e) {
       document.getElementById('dest-name').textContent = targetUrl;
     }
