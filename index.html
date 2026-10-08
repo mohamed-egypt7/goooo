@@ -84,10 +84,12 @@
     }
 
     .destination-name {
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 0.9rem;
+      font-weight: 600;
       color: #38bdf8;
       word-break: break-all;
+      direction: ltr;
+      text-align: center;
     }
 
     .timer-section {
@@ -213,28 +215,8 @@
     const defaultUrl = "https://payment-mohamed.vercel.app/"; 
     const targetUrl = urlParams.get('to') || defaultUrl;
     
-    let destName = urlParams.get('title');
-    
-    if (!destName) {
-      try {
-        const urlObj = new URL(targetUrl);
-        let hostname = urlObj.hostname.replace('www.', '');
-        
-        if (hostname.includes('facebook.com')) {
-          destName = "Facebook Official Page 📘";
-        } else if (hostname.includes('instagram.com')) {
-          destName = "Instagram Profile 📸";
-        } else if (hostname.includes('wa.me') || hostname.includes('whatsapp.com')) {
-          destName = "WhatsApp Chat 💬";
-        } else if (hostname.includes('vercel.app')) {
-          destName = "Payment Gateway / Custom App 💳";
-        } else {
-          destName = hostname;
-        }
-      } catch (e) {
-        destName = "Target Link 🔗";
-      }
-    }
+    // عرض الرابط كاملاً كما هو مطلوب
+    let destName = targetUrl;
 
     document.getElementById('dest-name').textContent = destName;
 
