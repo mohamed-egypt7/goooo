@@ -188,7 +188,7 @@
   <div class="redirect-card">
     <div class="brand-section">
       <div class="logo">MY</div>
-      <p class="brand-tag">Created by <span class="brand-name">Mohamed Yasser</span>[span_0](start_span)[span_0](end_span)</p>
+      <p class="brand-tag">Created by <span class="brand-name">Mohamed Yasser</span></p>
     </div>
 
     <div class="destination-box">
@@ -197,14 +197,14 @@
     </div>
 
     <div class="timer-section">
-      <p class="timer-text">Automatic redirect in <span id="countdown" class="seconds-counter">5</span> seconds...</p>
+      <p class="timer-text">Automatic redirect in <span id="countdown" class="seconds-counter">3</span> seconds...</p>
       <div class="progress-bar-bg">
         <div id="progress" class="progress-bar-fill"></div>
       </div>
     </div>
 
     <div class="promo-box">
-      <p class="promo-title">✨ Smart NFC Stand[span_1](start_span)[span_1](end_span)</p>
+      <p class="promo-title">✨ Smart NFC Stand</p>
       <p class="promo-desc">Instantly share your social media, Google reviews, and payment options with a single tap!</p>
     </div>
 
@@ -215,12 +215,22 @@
   </div>
 
   <script>
-    // جلب الرابط المستهدف من البار بأمان تام
-    const urlParams = new URLSearchParams(window.location.search);
-    const defaultUrl = "https://payment-mohamed.vercel.app/"; 
-    let targetUrl = urlParams.get('to') || defaultUrl;
+    const defaultUrl = "https://payment-mohamed.vercel.app/";
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+    let targetUrl = urlParams.get('to');
 
-    // عرض اسم الدومين المستهدف بشكل مباشر وسريع
+    // فحص احتياطي ذكي لو الـ to مش موجودة بشكل مباشر، نقوم استخلاص الرابط من الـ Query String
+    if (!targetUrl && queryString.includes('http')) {
+      const rawMatch = queryString.match(/https?:\/\/[^\s]+/);
+      if (rawMatch) {
+        targetUrl = rawMatch[0];
+      }
+    }
+
+    targetUrl = targetUrl || defaultUrl;
+
     try {
       const urlObj = new URL(targetUrl);
       document.getElementById('dest-name').textContent = urlObj.hostname;
@@ -234,7 +244,7 @@
 
     document.getElementById('redirect-btn').addEventListener('click', doRedirect);
 
-    let timeLeft = 5;
+    let timeLeft = 3;
     const countdownEl = document.getElementById('countdown');
     const progressEl = document.getElementById('progress');
 
@@ -242,7 +252,7 @@
       timeLeft--;
       countdownEl.textContent = timeLeft;
       
-      let percentage = (timeLeft / 5) * 100;
+      let percentage = (timeLeft / 3) * 100;
       progressEl.style.width = percentage + '%';
 
       if (timeLeft <= 0) {
