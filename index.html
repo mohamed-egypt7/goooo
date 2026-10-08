@@ -264,6 +264,8 @@
           destName = "WhatsApp Chat 💬";
         } else if (hostname.includes('vercel.app')) {
           destName = "Payment Gateway / Custom App 💳";
+        } else if (hostname.includes('truecaller.com')) {
+          destName = "Truecaller Profile 🔍";
         } else {
           destName = hostname;
         }
@@ -289,5 +291,14 @@
       countdownEl.textContent = timeLeft;
       
       let percentage = (timeLeft / 5) * 100;
-      progress_width = percentage + '%';
-      progressEl.style.width =
+      progressEl.style.width = percentage + '%';
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        doRedirect();
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
