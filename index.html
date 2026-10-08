@@ -237,12 +237,10 @@
       targetUrl = defaultUrl;
     }
 
-    // جدول الأسماء المخصصة (لروابطك أو مساراتك الخاصة)
-    // يمكنك إضافة أي مسار خاص بك هنا مع الاسم الذي تريد أن يظهر بدقة
+    // القاموس المخصص لروابطك ومشاريعك الخاصة
     const customNames = {
-      "mo-carrd": "Mo Carrd",
-      "profile": "My Profile",
-      "payment": "Payment Page"
+      "payment": "Payment Page",
+      "mo-carrd": "Mo Carrd"
     };
 
     try {
@@ -250,24 +248,21 @@
       let hostname = urlObj.hostname.toLowerCase();
       let displayName = "";
 
-      // لو الرابط من دومين الاختصار الخاص بك (s-h.s.gy)
-      if (hostname.includes('s-h.s.gy')) {
+      // لو الرابط تابع لدومينك الخاص أو رابط اختصارك (أو يمكنك إضافة دومينك الشيك الجديد هنا لاحقاً)
+      if (hostname.includes('s-h.s.gy') || hostname.includes('vercel.app')) {
         let pathSegments = urlObj.pathname.split('/').filter(Boolean);
-        if (pathSegments.length > 0) {
-          let segment = pathSegments[pathSegments.length - 1].toLowerCase();
-          // لو المسار موجود في القائمة المخصصة لدينا، نعرضه كما هو محدد
-          if (customNames[segment]) {
-            displayName = customNames[segment];
-          } else {
-            // لو مسار جديد من عندنا ومش موجود في القائمة، نظبطه تلقائياً (نشيل الشرطات ونكبر أول حرف)
-            let cleaned = segment.replace(/[-_]/g, ' ');
-            displayName = cleaned.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-          }
+        let subDomain = hostname.split('.')[0];
+        
+        let targetKey = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1].toLowerCase() : subDomain;
+
+        if (customNames[targetKey]) {
+          displayName = customNames[targetKey];
         } else {
-          displayName = "Mohamed Yasser";
+          let cleaned = targetKey.replace(/[-_]/g, ' ');
+          displayName = cleaned.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
         }
       } else {
-        // لو الرابط من عند أي شخص تاني أو دومين خارجي، يجيب اسم الدومين ويكبر أول حرف تلقائياً
+        // لأي دومين خارجي آخر، استخراج اسم الموقع وتكبير أول حرف منه تلقائياً
         let domainParts = hostname.replace('www.', '').split('.');
         let siteName = domainParts.length >= 2 ? domainParts[domainParts.length - 2] : domainParts[0];
         displayName = siteName.charAt(0).toUpperCase() + siteName.slice(1);
