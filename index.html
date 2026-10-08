@@ -197,3 +197,104 @@
     </div>
 
     <div class="timer-section">
+      <p class="timer-text">Automatic redirect in <span id="countdown" class="seconds-counter">3</span> seconds...</p>
+      <div class="progress-bar-bg">
+        <div id="progress" class="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <div class="promo-box">
+      <p class="promo-title">✨ Smart NFC Stand</p>
+      <p class="promo-desc">Instantly share your social media, Google reviews, and payment options with a single tap!</p>
+    </div>
+
+    <div class="actions">
+      <button id="redirect-btn" class="btn btn-primary">Go Now 🚀</button>
+      <a href="https://s-h.s.gy" target="_blank" class="btn btn-secondary">Get Your Custom NFC Stand 📲</a>
+    </div>
+  </div>
+
+  <script>
+    const defaultUrl = "https://payment-mohamed.vercel.app/";
+    const fullHref = window.location.href;
+    
+    let targetUrl = defaultUrl;
+    
+    if (fullHref.includes('?to=')) {
+      const parts = fullHref.split('?to=');
+      if (parts.length > 1) {
+        targetUrl = decodeURIComponent(parts[1]);
+      }
+    } else if (fullHref.includes('&to=')) {
+      const parts = fullHref.split('&to=');
+      if (parts.length > 1) {
+        targetUrl = decodeURIComponent(parts[1]);
+      }
+    }
+
+    targetUrl = targetUrl.trim();
+    if (!targetUrl.startsWith('http')) {
+      targetUrl = defaultUrl;
+    }
+
+    // القاموس المخصص لروابطك ومشاريعك الخاصة
+    const customNames = {
+      "payment": "Payment Page",
+      "mo-carrd": "Mo Carrd"
+    };
+
+    try {
+      const urlObj = new URL(targetUrl);
+      let hostname = urlObj.hostname.toLowerCase();
+      let displayName = "";
+
+      if (hostname.includes('s-h.s.gy') || hostname.includes('vercel.app')) {
+        let pathSegments = urlObj.pathname.split('/').filter(Boolean);
+        let subDomain = hostname.split('.')[0];
+        
+        let targetKey = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1].toLowerCase() : subDomain;
+
+        if (customNames[targetKey]) {
+          displayName = customNames[targetKey];
+        } else {
+          let cleaned = targetKey.replace(/[-_]/g, ' ');
+          displayName = cleaned.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+      } else {
+        let domainParts = hostname.replace('www.', '').split('.');
+        let siteName = domainParts.length >= 2 ? domainParts[domainParts.length - 2] : domainParts[0];
+        displayName = siteName.charAt(0).toUpperCase() + siteName.slice(1);
+      }
+
+      document.getElementById('dest-name').textContent = displayName;
+      document.title = "Redirecting to " + displayName;
+    } catch (e) {
+      document.getElementById('dest-name').textContent = targetUrl;
+    }
+
+    function doRedirect() {
+      window.location.replace(targetUrl);
+    }
+
+    document.getElementById('redirect-btn').addEventListener('click', doRedirect);
+
+    let timeLeft = 3; // تم التعديل إلى 3 ثوانٍ
+    const countdownEl = document.getElementById('countdown');
+    const progressEl = document.getElementById('progress');
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = timeLeft;
+      
+      let percentage = (timeLeft / 3) * 100; // حساب النسبة بناءً على 3 ثوانٍ
+      progressEl.style.width = percentage + '%';
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        doRedirect();
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
